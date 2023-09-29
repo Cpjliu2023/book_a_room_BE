@@ -9,14 +9,13 @@ describe('BookingService', () => {
   });
 
   it('should not book a room and return false when the room is already booked', () => {
-    const bookingService1 = new BookingService();
-    const bookingService2 = new BookingService();
+    const bookingService = new BookingService();
 
     // Book the room first using bookingService1
-    bookingService1.bookRoom('A', '2023-10-01', 'John');
+    bookingService.bookRoom('A', '2023-10-01', 'John');
 
     // Attempt to book the same room on the same date using bookingService2
-    const isBooked = bookingService2.bookRoom('A', '2023-10-01', 'Jane');
+    const isBooked = bookingService.bookRoom('A', '2023-10-01', 'Jane');
     expect(isBooked).toBe(false);
   });
 

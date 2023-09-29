@@ -3,8 +3,11 @@ import fs from 'fs';
 import path from 'path';
 import { Booking } from '../models/Booking';
 
-const DATA_DIR = path.join(__dirname, '../../data');
-const BOOKINGS_FILE = path.join(DATA_DIR, 'bookings.json');
+// const DATA_DIR = path.join(__dirname, '../../data');
+// const BOOKINGS_FILE = path.join(DATA_DIR, 'bookings.json');
+const DATA_DIR = `${__dirname}/../../data`;
+const BOOKINGS_FILE = `${DATA_DIR}/bookings.json`;
+
 
 class BookingService {
     private bookings: Booking[] = [];
@@ -48,6 +51,10 @@ class BookingService {
     }
 
     getAvailableRooms(date: string): string[] {
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!dateRegex.test(date)) {
+            return [];
+        }
         const bookedRooms = this.bookings
             .filter(booking => booking.date === date)
             .map(booking => booking.roomId);
